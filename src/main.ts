@@ -3,22 +3,24 @@ import { tabularDatos, type AlineacionTabulacion } from './TabuladorTexto'
 const $salida = document.querySelector("#salida");
 const $agregarFila = document.querySelector("#agregarFila");
 const $agregarColumna = document.querySelector("#agregarColumna");
-const $tabla = document.querySelector("#tabla");
-const $separador = document.querySelector("#separador");
-const $relleno = document.querySelector("#relleno");
-const $usarLineaSeparadora = document.querySelector("#usarLineaSeparadora");
-const $ajustesLineaSeparadora = document.querySelector("#ajustesLineaSeparadora");
-const $separadorLinea = document.querySelector("#separadorLinea");
-const $contenidoLinea = document.querySelector("#contenidoLinea");
-const $rellenoLinea = document.querySelector("#rellenoLinea");
+const $tabla = document.querySelector("#tabla") as HTMLTableElement;
+const $separador = document.querySelector("#separador") as HTMLInputElement;
+const $relleno = document.querySelector("#relleno") as HTMLInputElement;
+const $usarLineaSeparadora = document.querySelector("#usarLineaSeparadora") as HTMLInputElement;
+const $ajustesLineaSeparadora = document.querySelector("#ajustesLineaSeparadora") as HTMLDivElement;
+const $separadorLinea = document.querySelector("#separadorLinea") as HTMLInputElement;
+const $contenidoLinea = document.querySelector("#contenidoLinea") as HTMLInputElement;
+const $rellenoLinea = document.querySelector("#rellenoLinea") as HTMLInputElement;
 
 $usarLineaSeparadora?.addEventListener("change", () => {
-  if ($usarLineaSeparadora.checked) {
-    $ajustesLineaSeparadora.hidden = false;
-  } else {
-    $ajustesLineaSeparadora.hidden = true;
+  if ($ajustesLineaSeparadora != null && $usarLineaSeparadora !== null) {
+    if ($usarLineaSeparadora.checked) {
+      $ajustesLineaSeparadora.hidden = false;
+    } else {
+      $ajustesLineaSeparadora.hidden = true;
+    }
+    generar();
   }
-  generar();
 })
 
 const LONGITUD_COLUMNA_POR_DEFECTO = 20;
@@ -33,6 +35,9 @@ const tabla: string[][] = [
 
 
 const dibujarTabla = () => {
+  if ($tabla === null) {
+    return;
+  }
   const $thead = document.createElement("thead");
   for (let i = 0; i < longitudes.length; i++) {
     const longitud = longitudes[i];
@@ -132,6 +137,9 @@ const agregarColumna = () => {
 }
 
 const generar = () => {
+  if ($salida === null) {
+    return;
+  }
   for (let i = 0; i < longitudes.length; i++) {
     if (longitudes[i] <= 0) {
       return alert("La longitud de cada columna debe ser mayor a 0");
@@ -142,7 +150,7 @@ const generar = () => {
     const fila = tabla[i];
     let lineasParaSeparar: string[] = [];
     if ($usarLineaSeparadora.checked) {
-      lineasParaSeparar = tabularDatos(fila.map((contenido: string, indice: number) => {
+      lineasParaSeparar = tabularDatos(fila.map((_, indice: number) => {
         return {
           alineacion: alineaciones[indice], contenido: $contenidoLinea.value, maximaLongitud: longitudes[indice]
         }
