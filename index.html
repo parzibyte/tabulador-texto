@@ -8,22 +8,65 @@
   <title>Tabulador de texto</title>
 </head>
 
-<body>
-  <input type="text">
-  <button id="agregarColumna">+ Columna</button>
-  <button id="agregarFila">+ Fila</button>
-  <input value="|" type="text" id="separador" placeholder="Separador de columnas">
-  <input value=" " type="text" id="relleno" placeholder="Relleno de línea">
-  <label for="usarLineaSeparadora">Incluir línea separadora</label>
-  <input checked id="usarLineaSeparadora" type="checkbox">
-  <div id="ajustesLineaSeparadora">
-    <input value="+" type="text" id="separadorLinea" placeholder="Separador de línea">
-    <input value="-" type="text" id="contenidoLinea" placeholder="Contenido de línea">
-    <input value="-" type="text" id="rellenoLinea" placeholder="Relleno de línea">
+<body class="bg-blue-50 min-h-screen flex flex-col items-center p-6 gap-6 font-sans">
+  <div class="flex flex-wrap gap-4 items-end">
+    <button id="agregarColumna"
+      class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+      + Columna
+    </button>
+
+    <button id="agregarFila" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+      + Fila
+    </button>
   </div>
-  <table id="tabla"></table>
-  <pre id="salida"></pre>
-  <script type="module" src="/src/main.ts"></script>
+
+  <div class="flex flex-wrap gap-4 items-end">
+    <div class="flex flex-col">
+      <label for="separador" class="text-gray-700 font-medium mb-1">Separador de columnas</label>
+      <input value="|" type="text" id="separador" placeholder="Ej: |"
+        class="border border-blue-300 rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="relleno" class="text-gray-700 font-medium mb-1">Relleno de línea</label>
+      <input value=" " type="text" id="relleno" placeholder="Ej: espacio"
+        class="border border-blue-300 rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500" />
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <input checked id="usarLineaSeparadora" type="checkbox"
+      class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+    <label for="usarLineaSeparadora" class="text-gray-700 font-medium">Incluir línea separadora</label>
+  </div>
+
+  <div id="ajustesLineaSeparadora" class="flex flex-wrap gap-4">
+    <div class="flex flex-col">
+      <label for="separadorLinea" class="text-gray-700 font-medium mb-1">Separador de línea</label>
+      <input value="+" type="text" id="separadorLinea" placeholder="Ej: +"
+        class="border border-blue-300 rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="contenidoLinea" class="text-gray-700 font-medium mb-1">Contenido de línea</label>
+      <input value="-" type="text" id="contenidoLinea" placeholder="Ej: -"
+        class="border border-blue-300 rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="rellenoLinea" class="text-gray-700 font-medium mb-1">Relleno de línea</label>
+      <input value="-" type="text" id="rellenoLinea" placeholder="Ej: -"
+        class="border border-blue-300 rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500" />
+    </div>
+  </div>
+
+  <div class="w-full max-w-max overflow-x-auto rounded-lg shadow">
+    <table id="tabla" class="border border-blue-300 rounded-lg text-center text-gray-800 bg-white w-full min-w-max">
+    </table>
+  </div>
+  <pre id="salida" class="bg-gray-900 text-green-300 rounded-lg p-4 shadow-lg w-full max-w-3xl overflow-x-auto"></pre>
 </body>
+
+<script type="module" src="/src/main.ts"></script>
 
 </html>
