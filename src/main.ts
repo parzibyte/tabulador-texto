@@ -37,10 +37,14 @@ const dibujarTabla = () => {
   for (let i = 0; i < longitudes.length; i++) {
     const longitud = longitudes[i];
     const $th = document.createElement("th");
+    $th.classList.add("px-4", "py-2", "border", "border-blue-200", "bg-blue-50", "text-gray-700", "text-sm");
     const $input = Object.assign(document.createElement("input"), {
       type: "number",
       value: longitud,
     })
+
+    $input.classList.add("border", "border-blue-300", "rounded-lg", "px-2", "py-1", "shadow-sm", "focus:ring-2", "focus:ring-blue-500");
+
     //
 
     const $selectAlineacion = document.createElement("select");
@@ -48,6 +52,7 @@ const dibujarTabla = () => {
       value: "c",
       textContent: "Centro"
     }))
+
 
     $selectAlineacion.appendChild(Object.assign(document.createElement("option"), {
       value: "i",
@@ -61,6 +66,7 @@ const dibujarTabla = () => {
       alineaciones[i] = $selectAlineacion.value as AlineacionTabulacion;
       generar();
     })
+    $selectAlineacion.classList.add("border", "border-blue-300", "rounded-lg", "px-2", "py-1", "shadow-sm", "focus:ring-2", "focus:ring-blue-500", "ml-2");
     //
     $input.addEventListener("input", () => {
       longitudes[i] = $input.valueAsNumber;
@@ -71,13 +77,16 @@ const dibujarTabla = () => {
     $thead.appendChild($th);
   }
   const $tbody = document.createElement("tbody");
+  $tbody.classList.add("divide-y", "divide-blue-200");
 
   for (let y = 0; y < tabla.length; y++) {
     const fila = tabla[y];
     const $tr = document.createElement("tr");
+    $tr.classList.add("hover:bg-blue-50", "transition");
     for (let x = 0; x < fila.length; x++) {
       const elemento = fila[x];
       const $td = document.createElement("td");
+      $td.classList.add("px-2", "py-1", "border", "border-blue-200");
       const $input = Object.assign(document.createElement("input"), {
         type: "",
         value: elemento,
@@ -86,6 +95,7 @@ const dibujarTabla = () => {
         tabla[y][x] = $input.value;
         generar();
       })
+      $input.classList.add("border", "border-blue-300", "rounded-lg", "px-2", "py-1", "shadow-sm", "focus:ring-2", "focus:ring-blue-500", "w-full");
       $td.appendChild($input);
       $tr.appendChild($td);
     }
@@ -122,6 +132,11 @@ const agregarColumna = () => {
 }
 
 const generar = () => {
+  for (let i = 0; i < longitudes.length; i++) {
+    if (longitudes[i] <= 0) {
+      return alert("La longitud de cada columna debe ser mayor a 0");
+    }
+  }
   $salida.textContent = "";
   for (let i = 0; i < tabla.length; i++) {
     const fila = tabla[i];
