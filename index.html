@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabulador de texto</title>
+</head>
+
+<body>
+  <input type="text">
+  <button id="agregarColumna">+ Columna</button>
+  <button id="agregarFila">+ Fila</button>
+  <input value="|" type="text" id="separador" placeholder="Separador de columnas">
+  <input value=" " type="text" id="relleno" placeholder="Relleno de línea">
+  <label for="usarLineaSeparadora">Incluir línea separadora</label>
+  <input checked id="usarLineaSeparadora" type="checkbox">
+  <div id="ajustesLineaSeparadora">
+    <input value="+" type="text" id="separadorLinea" placeholder="Separador de línea">
+    <input value="-" type="text" id="contenidoLinea" placeholder="Contenido de línea">
+    <input value="-" type="text" id="rellenoLinea" placeholder="Relleno de línea">
+  </div>
+  <table id="tabla"></table>
+  <pre id="salida"></pre>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
